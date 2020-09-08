@@ -1,0 +1,88 @@
+{% ckan_extends %}
+
+{% block footer_content %}
+<!-- Powerdエリア -->
+<div id="powerd">
+  <div class="powerd-inner">
+    <!-- フッターウィジェット -->
+    <div class="row">
+      <article class="half">
+        <div id="pwbox">
+        <div id="text-2" class="widget widget_text"><div class="sidebar-title2">HOSTED BY</div><div class="textwidget"><a href="http://www.bodik.jp/" target="_blank"><img src="http://odcs.bodik.jp/wp-content/themes/bodik_odcs/images/footlogo.png" alt="ビッグデータ&オープンデータ研究会in九州" class="alignleft"></a>
+        <span class="alignleft white">ビッグデータ&オープンデータ研究会in九州<br />
+        〒814-0001 福岡市早良区百道浜2-1-22-7F<br />
+        TEL:092-852-3510 FAX:092-852-3455</span></div>
+        </div></div>
+      </article>
+      <article class="fifth">
+        <div id="pwbox">
+        <div id="text-3" class="widget widget_text"><div class="sidebar-title2">POWERED BY</div><div class="textwidget"><a href="http://ckan.org/" target="_blank"><img src="http://odcs.bodik.jp/wp-content/themes/bodik_odcs/images/ckan_logo.png" alt="ckan"></a>
+        </div>
+        </div></div>
+      </article>
+      <article class="fifth">
+        <div id="pwbox">
+        <div id="text-4" class="widget widget_text"><div class="sidebar-title2">POWERED BY</div><div class="textwidget"><a href="https://ja.wordpress.org/" target="_blank"><img src="http://odcs.bodik.jp/wp-content/themes/bodik_odcs/images/wp_logo.png" alt="Wordpress"></a></div>
+        </div></div>
+      </article>
+    </div>
+    <!-- / フッターウィジェット -->
+    <div class="clear"></div>
+  </div>
+</div>
+<!-- / Powerdエリア -->
+
+<div class="row">
+  <div class="span2 footer-links">
+    <ul class="unstyled">
+      <li><strong>Navigation</strong></li>
+      <li><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/">ホーム</a></li>
+      <li>
+      {% if c.pkg_dict %}<a href="http://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">
+      {% elif c.group.name and c.group.is_organization %}<a href="http://data.bodik.jp/organization/{{ c.group.name }}">
+      {% else %}<a href="http://data.bodik.jp/dataset/">
+      {% endif %}データセット</a></li>
+      <li>
+      {% if c.pkg_dict %}<a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">
+      {% elif c.group.name and c.group.is_organization %}<a href="http://odcs.bodik.jp/{{ c.group.name }}/category/">
+      {% else %}<a href="http://data.bodik.jp/group/">
+      {% endif %}カテゴリ</a></li>
+      <li><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/app/">活用事例</a></li>
+      <li><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/tos/">利用規約</a></li>
+      <li><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/contact/">お問い合わせ</a></li>
+    </ul>
+  </div>
+  <div class="span3">
+    <ul class="unstyled">
+      <li><strong>BODIK ODCS Groups</strong></li>
+      <li><a href="http://odcs.bodik.jp/isit">ISIT</a></li>
+      <li><a href="http://odcs.bodik.jp/urc">URC</a></li>
+      <li><a href="http://odcs.bodik.jp/city">連携中枢都市</a></li>
+      <li><a href="http://odcs.bodik.jp/402036">〇〇市</a></li>
+      <li><a href="http://odcs.bodik.jp/402125">▲▲市</a></li>
+      <li><a href="http://odcs.bodik.jp/402168">■■市</a></li>
+      <li><a href="http://odcs.bodik.jp/402257">XX市</a></li>
+      <li><a href="http://odcs.bodik.jp/405035">〇〇町</a></li>
+      <li><a href="http://odcs.bodik.jp/405221">■■町</a></li>
+    </ul>
+  </div>
+  <div class="span4 bodik">
+    <ul class="unstyled">
+      <li><strong>Hosted by</strong></li>
+      <li><a href="http://odcs.bodik.jp" title="BODIK Website"><img src="http://odcs.bodik.jp/wp-content/themes/bodik/images/footlogo.png" alt="BODIK Website"/></a></li>
+      <li>ビッグデータ&amp;オープンデータ研究会in九州</li>
+      <li>〒814-0001 福岡市早良区百道浜2-1-22-7F</li>
+      <li>TEL:092-852-3510  FAX:092-852-3455</li>
+    </ul>
+  </div>
+  <div class="span3 attribution">
+    <ul class="unstyled">
+      <li><strong>Powered by</strong></li>
+      <li><a href="http://ckan.org"><img src="/images/ckan-logo.png"></a></li>
+      <li><a href="http://wordpress.org"><img src="/images/wordpress-logo.png"></a></li>
+      <li><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% else %}{{ c.group.name }}{% endif %}/auth/">Login</a></li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

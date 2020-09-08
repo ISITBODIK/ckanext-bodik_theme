@@ -1,0 +1,195 @@
+{% block header_wrapper %}
+
+{% block header_account %}
+      {% block header_account_container_content %}
+        {% if c.userobj %}
+      <header class="account-masthead">
+        <div class="container">
+          <div class="account avatar authed" data-module="me" data-me="{{ c.userobj.id }}">
+            <ul class="unstyled">
+              {% block header_account_logged %}
+              {% if c.userobj.sysadmin %}
+                <li>
+                  <a href="{{ h.url_for(controller='admin', action='index') }}" title="{{ _('Sysadmin settings') }}">
+                    <i class="icon-legal" style="color:white"></i>
+                  </a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                  {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
+                  <span class="username" style="color:white">{{ c.userobj.display_name }}</span>
+                </a>
+              </li>
+              {% set new_activities = h.new_activities() %}
+              <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
+                <a href="{{ h.url_for(controller='user', action='dashboard') }}" title="{{ notifications_tooltip }}">
+                  <i class="icon-dashboard" style="color:white"></i>
+                  <span style="color:white">{{ new_activities }}</span>
+                </a>
+              </li>
+              {% block header_account_settings_link %}
+                <li>
+                  <a href="{{ h.url_for(controller='user', action='edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
+                    <i class="icon-cog" style="color:white"></i>
+                  </a>
+                </li>
+              {% endblock %}
+              {% block header_account_log_out_link %}
+                <li>
+                  <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+                    <i class="icon-signout" style="color:white"></i>
+                  </a>
+                </li>
+              {% endblock %}
+              {% endblock %}
+            </ul>
+          </div>
+        </div>
+      </header>
+        {% endif %}
+      {% endblock %}
+{% endblock %}
+
+<!-- ヘッダー -->
+<header id="header">
+
+<!-- ヘッダー中身 -->    
+<div class="header-inner">
+
+<!-- ロゴ -->
+<h1 class="logo">
+{% if c.search_url_params=="q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" %}
+<a href="http://odcs.bodik.jp/city/" title="city"><img src="http://odcs.bodik.jp/images/city/logo.gif" alt="連携中枢都市ロゴのイメージ"></a>
+{% elif c.pkg_dict %}
+<a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/" title="{{ c.pkg_dict['organization']['name'] }}"><img src="http://odcs.bodik.jp/images/{{ c.pkg_dict['organization']['name'] }}/logo.gif" alt="{{ c.pkg_dict['organization']['name'] }}のイメージ"></a>
+{% elif c.group.name %}
+<a href="http://odcs.bodik.jp/{{ c.group.name }}/" title="{{ c.group.name }}"><img src="http://odcs.bodik.jp/images/{{ c.group.name }}/logo.gif" alt="{{ c.group.name }}のイメージ"></a>
+{% else %}
+<a href="http://odcs.bodik.jp/" title="BODIK ODCSサイト"><img src="http://odcs.bodik.jp/images/logo.gif" alt="BODIK ODCSサイトのイメージ"></a>
+{% endif %}
+</h1>
+<!-- / ロゴ -->
+
+<!-- トップナビゲーション -->
+<div class="topinfo">
+<nav id="infonav" class="info-navigation" role="navigation">
+</nav>
+<!-- サーチ -->
+<!-- CKANデータセットの数を取得 -->
+<div class="search">
+{% if c.pkg_dict %}
+<form action="http://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}" method="get">
+{% elif c.group.name %}
+<form action="http://data.bodik.jp/organization/{{ c.group.name }}" method="get">
+{% else %}
+<form action="http://data.bodik.jp/dataset" method="get">
+{% endif %}
+
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" /><button type="submit"></button>
+<div class="search_txt">
+{% if c.search_url_params=="q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" %}{{ c.page|length }}件のデータ・セットから検索可能です
+{% elif c.package_count %}{{ c.package_count }}件のデータ・セットから検索可能です
+{% elif c.group_dict %}{{ c.group_dict['package_count'] }}件のデータ・セットから検索可能です
+{% elif c.pkg_dict  %}
+    {% if c.pkg_dict['organization']['is_organization'] %}
+        {{ h.bodik_theme_dataset_count( c.pkg_dict['organization']['name'] ) }}件のデータ・セットから検索可能です
+    {% endif %}
+{% else %}{{ h.bodik_theme_dataset_count("") }}件のデータ・セットから検索可能です
+{% endif %}
+</div>
+</form>
+</div><!--?php get_search_form(); ?-->
+<!-- / サーチ --> 
+</div>
+<!-- //トップナビゲーション -->
+
+</div>    
+<!-- / ヘッダー中身 -->    
+
+</header>
+<!-- / ヘッダー -->  
+<div class="clear"></div>
+
+<!-- トップナビゲーション -->
+<div class="nav_wrap">
+<nav id="nav" class="main-navigation" role="navigation">
+<div class="menu-topnav-container">
+<ul id="menu-topnav" class="nav-menu">
+
+    {% if c.pkg_dict %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="http://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-3">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/info/">お知らせ</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/app/">活用事例</a></li>
+        <li id="menu-item-6" class="nav06 menu-item-6">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/tos/">利用規約</a></li>
+        <li id="menu-item-7" class="nav07 menu-item-7">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/about/">サイトについて</a></li>
+        <li id="menu-item-8" class="nav08 menu-item-8">
+        <a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/contact/">お問い合わせ</a></li>
+    {% elif c.group.name and c.group.is_organization %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="http://data.bodik.jp/organization/{{ c.group.name }}">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-3">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/info/">お知らせ</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/app/">活用事例</a></li>
+        <li id="menu-item-6" class="nav06 menu-item-6">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/tos/">利用規約</a></li>
+        <li id="menu-item-7" class="nav07 menu-item-7">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/about/">サイトについて</a></li>
+        <li id="menu-item-8" class="nav08 menu-item-8">
+        <a href="http://odcs.bodik.jp/{{ c.group.name }}/contact/">お問い合わせ</a></li>
+    {% elif c.search_url_params=="q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="http://odcs.bodik.jp/city/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="http://data.bodik.jp/dataset?q=organization:(402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="http://odcs.bodik.jp/city/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="http://odcs.bodik.jp/city/info/">お知らせ</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="http://odcs.bodik.jp/city/app/">活用事例</a></li>
+        <li id="menu-item-6" class="nav06 menu-item-6">
+        <a href="http://odcs.bodik.jp/city/tos/">利用規約</a></li>
+        <li id="menu-item-7" class="nav07 menu-item-7">
+        <a href="http://odcs.bodik.jp/city/contact/">お問い合わせ</a></li>
+    {% else %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="http://odcs.bodik.jp/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="http://data.bodik.jp/dataset/">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-3">
+        <a href="http://odcs.bodik.jp/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="http://odcs.bodik.jp/apply/">自治体の方へ</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="http://odcs.bodik.jp/developers/">開発者の方へ</a></li>
+        <li id="menu-item-6" class="nav06 menu-item-5">
+        <a href="http://odcs.bodik.jp/about/">サイトについて</a></li>
+        <li id="menu-item-7" class="nav07 menu-item-7">
+        <a href="http://odcs.bodik.jp/contact/">お問い合わせ</a></li>
+        <li id="menu-item-8" class="nav08 menu-item-8">
+        <a href="http://www.bodik.jp/" target="_blank">BODIK HP</a></li>
+    {% endif %}
+
+</ul></div></nav>
+
+</div>
+<!-- / トップナビゲーション -->
+<div class="clear"></div>
+
+{% endblock %}

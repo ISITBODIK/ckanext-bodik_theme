@@ -1,0 +1,69 @@
+{% ckan_extends %}
+
+{% block header_account %}
+
+  {% if c.userobj %}
+    {{ super() }}
+  {% endif %}
+
+{% endblock %}
+
+{% block header_logo %}
+  
+  <h1 class="logo">
+  <a href="http://test.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% else %}{{ c.group.name }}{% endif %}/" title="{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% else %}{{ c.group.name }} {% endif %}"><img src="http://test.bodik.jp/wp-content/themes/bodik/images/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% else %}{{ c.group.name }}{% endif %}/logo.gif" alt="{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% else %}{{ c.group.name }}{% endif %}"/></a>
+  </h1>
+
+{% endblock %}
+
+{% block header_site_navigation %}
+
+{% endblock %}
+
+{% block header_site_search %}
+        <form class="section site-search simple-input"  method="get"  data-module="select-switch">
+          <div class="field">
+            <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search Datasets') }}{% endblock %}</label>
+            <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search') }}" />
+            <button class="btn-search" type="submit"><i class="icon-search"></i></button>
+          </div>
+        </form>
+        </br>{% if c.package_count %}<h6 style="color:#000;">{{ c.package_count }}件のデータ・セットから検索可能です。</h6>
+        {% elif c.group_dict %}<h6 style="color:#000;">{{ c.group_dict['package_count'] }}件のデータ・セットから検索可能です。</h6>
+        {% else %}<h6 style="color:#000;">{{ h.bodik_theme_dataset_count() }}件のデータ・セットから検索可能です。</h6>
+        {% endif %}
+{% endblock %}
+
+
+{% block header_wrapper %}
+
+{{ super() }}
+
+<div class="nav_wrap">
+<nav id="nav" class="main-navigation" role="navigation">
+    <div class="menu-topnav-container">
+      <ul id="menu-topnav" class="nav-menu">
+        <li id="menu-item-1" class="nav01 menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1">
+        <a href="http://test.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 menu-item menu-item-type-custom menu-item-object-custom menu-item-2">
+        {% if c.pkg_dict %}<a href="http://test2.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">
+        {% elif c.group.name and c.group.is_organization %}<a href="http://test2.bodik.jp/organization/{{ c.group.name }}">
+        {% else %}<a href="http://test2.bodik.jp/dataset/">
+        {% endif %}データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item menu-item-type-custom menu-item-object-custom menu-item-3">
+        {% if c.pkg_dict %}<a href="http://test.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">
+        {% elif c.group.name and c.group.is_organization %}<a href="http://test.bodik.jp/{{ c.group.name }}/category/">
+        {% else %}<a href="http://test2.bodik.jp/group/">
+        {% endif %}カテゴリ</a></li>
+        <li id="menu-item-4" class="nav04 menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
+        <a href="http://test.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/app/">活用事例</a></li>
+        <li id="menu-item-5" class="nav05 menu-item menu-item-type-custom menu-item-object-custom menu-item-5">
+        <a href="http://test.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/tos/">利用規約</a></li>
+        <li id="menu-item-6" class="nav06 menu-item menu-item-type-custom menu-item-object-custom menu-item-6">
+        <a href="http://test.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/contact/">お問い合わせ</a></li>
+      </ul>
+    </div>
+</nav>
+</div>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+<!-- Powerdエリア -->
+<div id="powerd">
+<div class="powerd-inner">
+
+<!-- フッターウィジェット -->
+<div class="row">
+<article class="half">
+<div id="pwbox">
+  <div id="text-2" class="widget widget_text"><div class="sidebar-title2">HOSTED BY</div><div class="textwidget"><a href="http://www.bodik.jp/" target="_blank"><img src="http://odcs.bodik.jp/images/footer/footlogo.png" alt="ビッグデータ&オープンデータ・イニシアティブ九州" class="alignleft"></a>
+<span class="alignleft white">ビッグデータ&オープンデータ・イニシアティブ九州<br />
+〒814-0001 福岡市早良区百道浜2-1-22-7F<br />
+TEL:092-852-3510 FAX:092-852-3455</span></div>
+    </div></div>
+</article>
+<article class="fifth">
+<div id="pwbox">
+  <div id="text-3" class="widget widget_text"><div class="sidebar-title2">POWERED BY</div><div class="textwidget"><a href="http://ckan.org/" target="_blank"><img src="http://odcs.bodik.jp/images/footer/ckan_logo.png" alt="ckan"></a>
+</div>
+    </div></div>
+</article>
+<article class="fifth">
+<div id="pwbox">
+  <div id="text-4" class="widget widget_text"><div class="sidebar-title2">POWERED BY</div><div class="textwidget"><a href="http://wordpress.org/" target="_blank"><img src="http://odcs.bodik.jp/images/footer/wp_logo.png" alt="wordpress"></a></div>
+    </div></div>
+</article>
+</div>
+<!-- / フッターウィジェット -->
+<div class="clear"></div>
+
+</div>
+</div>
+<!-- / Powerdエリア -->
+
+
+<!-- フッターエリア -->
+<footer id="footer">
+<div class="footer-inner">
+
+<!-- フッターウィジェット -->
+<div class="row">
+<article class="quarter">
+<div id="topbox">
+<div id="nav_menu-2" class="widget widget_nav_menu"><div class="sidebar-title">Navigation</div><div class="menu-footnav-container"><ul id="menu-footnav" class="menu">
+
+      {% if c.pkg_dict %}
+      <li id="menu-item-36" class="menu-item menu-item-36"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/">ホーム</a></li>
+      <li id="menu-item-37" class="menu-item menu-item-37"><a href="http://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">データセット</a></li>
+      <li id="menu-item-38" class="menu-item menu-item-38"><a href="http://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">カテゴリー</a></li>
+      <li id="menu-item-39" class="menu-item menu-item-39"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/info/">お知らせ</a></li>
+      <li id="menu-item-43" class="menu-item menu-item-43"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/app/">活用情報</a></li>
+      <li id="menu-item-40" class="menu-item menu-item-40"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/tos/">利用規約</a></li>
+      <li id="menu-item-41" class="menu-item menu-item-41"><a href="https://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/about/">サイトについて</a></li>
+      <li id="menu-item-41" class="menu-item menu-item-41"><a href="https://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/contact/">お問い合わせ</a></li>
+      {% elif c.group.name and c.group.is_organization %}
+      <li id="menu-item-36" class="menu-item menu-item-36"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/">ホーム</a></li>
+      <li id="menu-item-37" class="menu-item menu-item-37"><a href="http://data.bodik.jp/organization/{{ c.group.name }}">データセット</a></li>
+      <li id="menu-item-38" class="menu-item menu-item-38"><a href="http://odcs.bodik.jp/{{ c.group.name }}/category/">カテゴリー</a></li>
+      <li id="menu-item-39" class="menu-item menu-item-39"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/info/">お知らせ</a></li>
+      <li id="menu-item-43" class="menu-item menu-item-43"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/app/">活用情報</a></li>
+      <li id="menu-item-40" class="menu-item menu-item-40"><a href="http://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/tos/">利用規約</a></li>
+      <li id="menu-item-41" class="menu-item menu-item-41"><a href="https://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/about/">サイトについて</a></li>
+      <li id="menu-item-41" class="menu-item menu-item-41"><a href="https://odcs.bodik.jp/{% if c.pkg_dict %}{{ c.pkg_dict['organization']['name'] }}{% elif c.group.is_organization %}{{ c.group.name }}{% endif %}/contact/">お問い合わせ</a></li>
+      {% else %}
+      <li id="menu-item-36" class="menu-item menu-item-36"><a href="http://odcs.bodik.jp/">ホーム</a></li>
+      <li id="menu-item-37" class="menu-item menu-item-37"><a href="http://data.bodik.jp/dataset/">データセット</a></li>
+      <li id="menu-item-38" class="menu-item menu-item-38"><a href="http://odcs.bodik.jp/category/">カテゴリー</a></li>
+      <li id="menu-item-40" class="menu-item menu-item-40"><a href="http://odcs.bodik.jp/apply/">自治体の方へ</a></li>
+      <li id="menu-item-41" class="menu-item menu-item-41"><a href="http://odcs.bodik.jp/developers/">開発者の方へ</a></li>
+      <li id="menu-item-42" class="menu-item menu-item-42"><a href="https://odcs.bodik.jp/about/">サイトについて</a></li>
+      <li id="menu-item-43" class="menu-item menu-item-43"><a href="https://odcs.bodik.jp/contact/">お問い合わせ</a></li>
+      <li id="menu-item-44" class="menu-item menu-item-44"><a href="http://www.bodik.jp/">BODIKホームページ</a></li>
+      {% endif %}
+
+</ul></div></div></div>
+</article>
+<article class="quarter">
+<div id="topbox">
+<div id="nav_menu-4" class="widget widget_nav_menu"><div class="sidebar-title">BODIK ODCS Groups</div><div class="menu-bodik-odcs-groups-container"><ul id="menu-bodik-odcs-groups" class="menu">
+<li id="menu-item-35" class="menu-item menu-item-35"><a target="_blank" href="http://odcs.bodik.jp/">メインサイト</a></li>
+<li id="menu-item-35" class="menu-item menu-item-35"><a target="_blank" href="http://odcs.bodik.jp/402036">久留米市</a></li>
+<li id="menu-item-35" class="menu-item menu-item-35"><a target="_blank" href="http://odcs.bodik.jp/352021">宇部市</a></li>
+<li id="menu-item-35" class="menu-item menu-item-35"><a target="_blank" href="http://odcs.bodik.jp/410004">佐賀県</a></li>
+<li id="menu-item-35" class="menu-item menu-item-35"><a target="_blank" href="http://odcs.bodik.jp/412015">佐賀市</a></li>
+</ul></div></div></div>
+</article>
+<article class="half">
+<div id="topbox">
+<div id="nav_menu-4" class="widget widget_nav_menu"><div class="sidebar-title">About BODIK ODCS</div><div class="About-bodik-odcs-container">
+BODIK ODCSはオープンデータを公開するためのデータカタログサイトを地方自治体向けに無償で提供するサービスです。
+運営は<a href="http://www.bodik.jp/">ビッグデータ＆オープンデータ・イニシアティブ・イニシアティブ九州（BODIK）</a>の事務局である<a href="http://www.isit.or.jp">公益財団法人九州先端科学技術研究所</a>が行っています。
+BODIK ODCSを利用したい地方自治体の方は<a href="http://odcs.bodik.jp/apply/">こちら</a>からご連絡ください。
+</div></div>
+</div>
+
+</div>
+<!-- / フッターウィジェット -->
+<div class="clear"></div>
+
+</div>
+
+  {% block footer_debug %}
+    {% if g.debug %}
+      {% include 'snippets/debug.html' %}
+    {% endif %}
+  {% endblock %}
+
+</footer>
+<!-- / フッターエリア -->

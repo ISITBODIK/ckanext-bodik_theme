@@ -1,0 +1,36 @@
+{% ckan_extends %}
+
+{%- block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="/responsive.css" type="text/css" media="screen, print" />
+
+  {% if "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}
+      <link rel="stylesheet" type="text/css" href="/city.css" />
+  {% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/fukuoka-toshiken.css" />
+  {% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/miyazaki-pref.css" />
+  {% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/sasebo-toshiken.css" />
+  {% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/osumi-toshiken.css" />
+  {% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/nagasaki-toshiken.css" />
+  {% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/kripp.css" />
+  {% elif c.pkg_dict %}
+      <link rel="stylesheet" type="text/css" href="/{{ c.pkg_dict['organization']['name'] }}.css" />
+  {% elif c.group.name and c.group.is_organization %}
+      <link rel="stylesheet" type="text/css" href="/{{ c.group.name }}.css" />
+  {% else %}
+      <link rel="stylesheet" type="text/css" href="/bodik_odcs.css" />
+  {% endif %}
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=1.7.1'></script>
+  <script type="text/javascript" src="https://odcs.bodik.jp/wp-content/themes/bodik_odcs/jquery/scrolltopcontrol.js"></script>
+  
+{% endblock %}
+
+{% block head_extras %}
+  {{ super() }}
+
+{% endblock %}

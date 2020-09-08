@@ -1,0 +1,21 @@
+{% ckan_extends %}
+
+{% block page_primary_action %}
+  {% if h.check_access('package_create') %}
+    {# link_for _('Add Dataset'), controller='package', action='new', class_="btn btn-primary", icon="plus-sign-alt" #}
+  {% endif %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  <h2 class="hide-heading">{{ _('My Datasets') }}</h2>
+  {% if c.user_dict.datasets %}
+    {% snippet 'snippets/package_list.html', packages=c.user_dict.datasets %}
+  {% else %}
+    <p class="empty">
+      {{ _('You haven\'t created any datasets.') }}
+      {% if h.check_access('package_create') %}
+        </br>新規データセットを作成する場合は、「私の組織」からデータセットを作成したい組織をクリックして、</br>「データセットを追加」ボタンを押して下さい。
+      {% endif %}
+    </p>
+  {% endif %}
+{% endblock %}

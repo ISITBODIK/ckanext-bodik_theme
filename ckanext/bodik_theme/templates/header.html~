@@ -1,0 +1,410 @@
+{% block header_wrapper %}
+
+{% block header_account %}
+      {% block header_account_container_content %}
+        {% if c.userobj %}
+      <header class="account-masthead">
+        <div class="container">
+          <div class="account avatar authed" data-module="me" data-me="{{ c.userobj.id }}">
+            <ul class="unstyled">
+              {% block header_account_logged %}
+              {% if c.userobj.sysadmin %}
+                <li>
+                  <a href="{{ h.url_for(controller='admin', action='index') }}" title="{{ _('Sysadmin settings') }}">
+                    <i class="icon-legal" style="color:white"></i>
+                  </a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                  {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
+                  <span class="username" style="color:white">{{ c.userobj.display_name }}</span>
+                </a>
+              </li>
+              {% set new_activities = h.new_activities() %}
+              <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+                {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
+                <a href="{{ h.url_for(controller='user', action='dashboard') }}" title="{{ notifications_tooltip }}">
+                  <i class="icon-dashboard" style="color:white"></i>
+                  <span style="color:white">{{ new_activities }}</span>
+                </a>
+              </li>
+              {% block header_account_settings_link %}
+                <li>
+                  <a href="{{ h.url_for(controller='user', action='edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
+                    <i class="icon-cog" style="color:white"></i>
+                  </a>
+                </li>
+              {% endblock %}
+              {% block header_account_log_out_link %}
+                <li>
+                  <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
+                    <i class="icon-signout" style="color:white"></i>
+                  </a>
+                </li>
+              {% endblock %}
+              {% endblock %}
+            </ul>
+          </div>
+        </div>
+      </header>
+        {% endif %}
+      {% endblock %}
+{% endblock %}
+
+<!-- ヘッダー -->
+<header id="header">
+
+<!-- ヘッダー中身 -->    
+<div class="header-inner">
+
+<!-- ロゴ -->
+<h1 class="logo">
+{% if "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}
+<a href="https://odcs.bodik.jp/city/" title="city"><img src="https://odcs.bodik.jp/images/city/logo.gif" alt="連携中枢都市ロゴのイメージ"></a>
+{% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/fukuoka-toshiken/" title="fukuoka-toshiken"><img src="https://odcs.bodik.jp/city/wp-content/themes/fukuoka-toshiken/images/logo.gif" alt="福岡都市圏ロゴのイメージ"></a>
+{% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/miyazaki-pref/" title="miyazaki-pref"><img src="https://odcs.bodik.jp/miyazaki-pref/wp-content/themes/miyazaki-pref/images/logo.gif" alt="みやざきオープンデータポータルロゴのイメージ"></a>
+{% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/sasebo-toshiken/" title="sasebo-toshiken"><img src="https://odcs.bodik.jp/city/wp-content/themes/sasebo-toshiken/images/logo.gif" alt="西九州させぼ広域都市圏のロゴのイメージ"></a>
+{% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/osumi-toshiken/" title="osumi-toshiken"><img src="https://odcs.bodik.jp/wp-content/themes/osumi-toshiken/images/logo.gif" alt="おおすみ広域のロゴのイメージ"></a>
+{% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/nagasaki-toshiken/" title="nagasaki-toshiken"><img src="https://odcs.bodik.jp/wp-content/themes/nagasaki-toshiken/images/logo.gif" alt="長崎広域連携中枢都市圏のロゴのイメージ"></a>
+{% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params  %}
+<a href="https://odcs.bodik.jp/kripp/" title="kripp"><img src="https://odcs.bodik.jp/wp-content/themes/kripp/images/logo.gif" alt="北九州地区電子自治体推進協議会のロゴのイメージ"></a>
+{% elif c.pkg_dict %}
+<a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/" title="{{ c.pkg_dict['organization']['name'] }}"><img src="https://odcs.bodik.jp/images/{{ c.pkg_dict['organization']['name'] }}/logo.gif" alt="{{ c.pkg_dict['organization']['name'] }}のイメージ"></a>
+{% elif c.group.name %}
+<a href="https://odcs.bodik.jp/{{ c.group.name }}/" title="{{ c.group.name }}"><img src="https://odcs.bodik.jp/images/{{ c.group.name }}/logo.gif" alt="{{ c.group.name }}のイメージ"></a>
+{% else %}
+<a href="https://odcs.bodik.jp/" title="BODIK ODCSサイト"><img src="https://odcs.bodik.jp/images/logo.gif" alt="BODIK ODCSサイトのイメージ"></a>
+{% endif %}
+</h1>
+<!-- / ロゴ -->
+
+<!-- トップナビゲーション -->
+<div class="topinfo">
+<nav id="infonav" class="info-navigation" role="navigation">
+</nav>
+<!-- サーチ -->
+<div class="search">
+{% if "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(422011+OR+423076+OR+423084)&text=" + user_query;
+    }
+</script>
+{% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params  %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input type="text" name="dummy" style="display:none;">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="button" onclick="addQuery()" ></button>
+<script type="text/javascript">
+    function addQuery() {
+        var user_query = document.getElementById('field-sitewide-search').value;
+        location.href="https://data.bodik.jp/dataset?q=organization:(401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473)&text=" + user_query;
+    }
+</script>
+{% elif c.pkg_dict %}
+<form action="https://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}" method="get">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="submit"></button>
+{% elif c.group.name %}
+<form action="https://data.bodik.jp/organization/{{ c.group.name }}" method="get">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="submit"></button>
+{% else %}
+<form action="https://data.bodik.jp/dataset" method="get">
+<input id="field-sitewide-search" name="q" type="text" onfocus="if(this.value=='データセットを検索') this.value='';" onblur="if(this.value=='') this.value='データセットを検索';" value="データセットを検索" />
+<button type="submit"></button>
+{% endif %}
+<!-- CKANデータセットの数を取得 -->
+<div class="search_txt">
+{% if "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}{{ h.bodik_theme_toshiken_dataset_count('(402036 OR 402125 OR 402168 OR 402257 OR 405035 OR 405221)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(401307 OR 402176 OR 402184 OR 402192 OR 402214 OR 403059 OR 402231 OR 403415 OR 403423 OR 403431 OR 403440 OR 403458 OR 403482 OR 403491 OR 402206 OR 402249 OR 402303)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(422029 OR 423238 OR 424111 OR 422070 OR 422088 OR 422126 OR 423211 OR 423831 OR 423220)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(450006 OR 452017 OR 452025 OR 452033 OR 452041 OR 452050 OR 452068 OR 452076 OR 452084 OR 452092 OR 453412 OR 453617 OR 453820 OR 453838 OR 454010 OR 454028 OR 454036 OR 454044 OR 454052 OR 454061 OR 454214 OR 454303 OR 454311 OR 454427 OR 454419 OR 454435)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(462039 OR 464929 OR 464902 OR 462217 OR 462144 OR 462179 OR 464686 OR 464821 OR 464911)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(422011 OR 423076 OR 423084)') }}件のデータセットから検索可能です
+{% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params  %}{{ h.bodik_theme_toshiken_dataset_count('(401005 OR 402044 OR 402133 OR 402141 OR 402150 OR 403814 OR 403822 OR 403831 OR 403849 OR 404021 OR 406015 OR 406210 OR 406252 OR 406422 OR 406465 OR 406473)') }}件のデータセットから検索可能です
+{% elif c.package_count %}{{ c.package_count }}件のデータセットから検索可能です
+{% elif c.group_dict %}{{ c.group_dict['package_count'] }}件のデータセットから検索可能です
+{% elif c.pkg_dict  %}
+    {% if c.pkg_dict['organization']['is_organization'] %}
+        {{ h.bodik_theme_dataset_count( c.pkg_dict['organization']['name'] ) }}件のデータセットから検索可能です
+    {% endif %}
+{% else %}{{ h.bodik_theme_dataset_count("") }}件のデータセットから検索可能です
+{% endif %}
+</div>
+</form>
+</div><!--?php get_search_form(); ?-->
+<!-- / サーチ --> 
+</div>
+<!-- //トップナビゲーション -->
+
+</div>    
+<!-- / ヘッダー中身 -->    
+
+</header>
+<!-- / ヘッダー -->  
+<div class="clear"></div>
+
+<!-- トップナビゲーション -->
+<div class="nav_wrap">
+<nav id="nav" class="main-navigation" role="navigation">
+<div class="menu-topnav-container">
+<ul id="menu-topnav" class="nav-menu">
+
+    {% if c.pkg_dict %}
+        {% if c.pkg_dict['organization']['name'] == '406210'  %}
+            <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+            <a href="https://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">データセット</a></li>
+            <li id="menu-item-3" class="nav03 menu-item-3">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">カテゴリー</a></li>
+            <li id="menu-item-4" class="nav04 menu-item-4">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/info/">お知らせ</a></li>
+            <li id="menu-item-5" class="nav05 menu-item-5">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/app/">活用事例</a></li>
+            <li id="menu-item-6" class="nav06 menu-item-6">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/tos/">利用規約</a></li>
+            <li id="menu-item-7" class="nav07 menu-item-7">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/about/">サイトについて</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/contact/">ご要望</a></li>
+            <li id="menu-item-9" class="nav09 menu-item-9">
+            <a href="https://maps.bodik.jp/{{ c.pkg_dict['organization']['name'] }}">オープンデータマップ</a></li>
+        {% else %}
+            <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+            <a href="https://data.bodik.jp/organization/{{ c.pkg_dict['organization']['name'] }}">データセット</a></li>
+            <li id="menu-item-3" class="nav03 menu-item-3">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/category/">カテゴリー</a></li>
+            <li id="menu-item-4" class="nav04 menu-item-4">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/info/">お知らせ</a></li>
+            <li id="menu-item-5" class="nav05 menu-item-5">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/app/">活用事例</a></li>
+            <li id="menu-item-6" class="nav06 menu-item-6">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/tos/">利用規約</a></li>
+            <li id="menu-item-7" class="nav07 menu-item-7">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/about/">サイトについて</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://odcs.bodik.jp/{{ c.pkg_dict['organization']['name'] }}/contact/">お問い合わせ</a></li>
+            <li id="menu-item-9" class="nav09 menu-item-9">
+            <a href="https://maps.bodik.jp/{{ c.pkg_dict['organization']['name'] }}">オープンデータマップ</a></li>
+        {% endif %}
+    {% elif c.group.name and c.group.is_organization %}
+       {% if c.group.name == '406210'  %}
+            <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+            <a href="https://data.bodik.jp/organization/{{ c.group.name }}">データセット</a></li>
+            <li id="menu-item-3" class="nav03 menu-item-3">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/category/">カテゴリー</a></li>
+            <li id="menu-item-4" class="nav04 menu-item-4">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/info/">お知らせ</a></li>
+            <li id="menu-item-5" class="nav05 menu-item-5">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/app/">活用事例</a></li>
+            <li id="menu-item-6" class="nav06 menu-item-6">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/tos/">利用規約</a></li>
+            <li id="menu-item-7" class="nav07 menu-item-7">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/about/">サイトについて</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/contact/">ご要望</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://maps.bodik.jp/{{ c.group.name }}">オープンデータマップ</a></li>
+        {% else %}
+            <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+            <a href="https://data.bodik.jp/organization/{{ c.group.name }}">データセット</a></li>
+            <li id="menu-item-3" class="nav03 menu-item-3">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/category/">カテゴリー</a></li>
+            <li id="menu-item-4" class="nav04 menu-item-4">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/info/">お知らせ</a></li>
+            <li id="menu-item-5" class="nav05 menu-item-5">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/app/">活用事例</a></li>
+            <li id="menu-item-6" class="nav06 menu-item-6">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/tos/">利用規約</a></li>
+            <li id="menu-item-7" class="nav07 menu-item-7">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/about/">サイトについて</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://odcs.bodik.jp/{{ c.group.name }}/contact/">お問い合わせ</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://maps.bodik.jp/{{ c.group.name }}">オープンデータマップ</a></li>
+        {% endif %}
+    {% elif "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/city/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/city/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/city/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/city/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://odcs.bodik.jp/">BODIK ODCS</a></li>
+            <li id="menu-item-8" class="nav08 menu-item-8">
+            <a href="https://maps.bodik.jp/city">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/fukuoka-toshiken/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/fukuoka-toshiken/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/fukuoka-toshiken/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/fukuoka-toshiken/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/fukuoka-toshiken">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/sasebo-toshiken/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(422029 OR 423238 OR 424111 OR 422070 OR 422088 OR 422126 OR 423211 OR 423831 OR 423220)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/sasebo-toshiken/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/sasebo-toshiken/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/sasebo-toshiken/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/sasebo-toshiken">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/miyazaki-pref/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/miyazaki-pref/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/miyazaki-pref/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/miyazaki-pref/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/miyazaki-pref">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/osumi-toshiken/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(462039 OR 464929 OR 464902 OR 462217 OR 462144 OR 462179 OR 464686 OR 464821 OR 464911)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/osumi-toshiken/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/osumi-toshiken/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/osumi-toshiken/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/osumi-toshiken">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/nagasaki-toshiken/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(422011 OR 423076 OR 423084)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/nagasaki-toshiken/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/nagasaki-toshiken/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/nagasaki-toshiken/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/nagasaki-toshiken">オープンデータマップ</a></li>
+    {% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/kripp/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset?q=organization:(401005 OR 402044 OR 402133 OR 402141 OR 402150 OR 403814 OR 403822 OR 403831 OR 403849 OR 404021 OR 406015 OR 406210 OR 406252 OR 406422 OR 406465 OR 406473)">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-2">
+        <a href="https://odcs.bodik.jp/kripp/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/kripp/about/">サイトについて</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/kripp/contact/">お問い合わせ</a></li>
+        <li id="menu-item-7" class="nav08 menu-item-8">
+        <a href="https://maps.bodik.jp/kripp">オープンデータマップ</a></li>
+    {% else %}
+        <li id="menu-item-1" class="nav01 menu-item-1">
+        <a href="https://odcs.bodik.jp/">ホーム</a></li>
+        <li id="menu-item-2" class="nav02 current-menu-item current-page-item menu-item-2">
+        <a href="https://data.bodik.jp/dataset/">データセット</a></li>
+        <li id="menu-item-3" class="nav03 menu-item-3">
+        <a href="https://odcs.bodik.jp/category/">カテゴリー</a></li>
+        <li id="menu-item-4" class="nav04 menu-item-4">
+        <a href="https://odcs.bodik.jp/apply/">自治体の方へ</a></li>
+        <li id="menu-item-5" class="nav05 menu-item-5">
+        <a href="https://odcs.bodik.jp/developers/">開発者の方へ</a></li>
+        <li id="menu-item-6" class="nav06 menu-item-5">
+        <a href="https://odcs.bodik.jp/about/">サイトについて</a></li>
+        <li id="menu-item-7" class="nav07 menu-item-7">
+        <a href="https://odcs.bodik.jp/contact/">お問い合わせ</a></li>
+        <li id="menu-item-8" class="nav08 menu-item-8">
+        <a href="https://www.bodik.jp/" target="_blank">BODIK HP</a></li>
+    {% endif %}
+
+</ul></div></nav>
+
+</div>
+<!-- / トップナビゲーション -->
+<div class="clear"></div>
+
+{% endblock %}

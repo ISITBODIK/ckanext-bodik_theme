@@ -1,0 +1,16 @@
+{% ckan_extends %}
+
+{{ super() }}
+
+        {% block nums %}
+        <div class="nums">
+          <dl>
+            <dt>{{ _('Datasets') }}</dt>
+            <dd>{{ h.SI_number_span(organization.package_count) }}</dd>
+          </dl>
+          {#<dl>
+            <dt>{{ _('Resource') }}</dt>
+            <dd>{{ h.SI_number_span(h.bodik_theme_resource_count(organization.name)) }}</dd>
+          </dl>#}
+        </div>
+        {% endblock %}
