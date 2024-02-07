@@ -1,0 +1,47 @@
+{% ckan_extends %}
+
+{%- block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="/responsive.css" type="text/css" media="screen, print" />
+
+  {% if "q=organization%3A%28402036+OR+402125+OR+402168+OR+402257+OR+405035+OR+405221%29" in c.search_url_params %}
+      <link rel="stylesheet" type="text/css" href="/city.css" />
+  {% elif "q=organization%3A%28401307+OR+402176+OR+402184+OR+402192+OR+402214+OR+403059+OR+402231+OR+403415+OR+403423+OR+403431+OR+403440+OR+403458+OR+403482+OR+403491+OR+402206+OR+402249+OR+402303%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/fukuoka-toshiken.css" />
+  {% elif "q=organization%3A%28450006+OR+452017+OR+452025+OR+452033+OR+452041+OR+452050+OR+452068+OR+452076+OR+452084+OR+452092+OR+453412+OR+453617+OR+453820+OR+453838+OR+454010+OR+454028+OR+454036+OR+454044+OR+454052+OR+454061+OR+454214+OR+454303+OR+454311+OR+454427+OR+454419+OR+454435%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/miyazaki-pref.css" />
+  {% elif "q=organization%3A%28422029+OR+423238+OR+424111+OR+422070+OR+422088+OR+422126+OR+423211+OR+423831+OR+423220%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/sasebo-toshiken.css" />
+  {% elif "q=organization%3A%28462039+OR+464929+OR+464902+OR+462217+OR+462144+OR+462179+OR+464686+OR+464821+OR+464911%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/osumi-toshiken.css" />
+  {% elif "q=organization%3A%28422011+OR+423076+OR+423084%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/nagasaki-toshiken.css" />
+  {% elif "q=organization%3A%28401005+OR+402044+OR+402133+OR+402141+OR+402150+OR+403814+OR+403822+OR+403831+OR+403849+OR+404021+OR+406015+OR+406210+OR+406252+OR+406422+OR+406465+OR+406473%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/kripp.css" />
+  {% elif "q=organization%3A%28250007+OR+252018+OR+252026+OR+252034+OR+252042+OR+252069+OR+252077+OR+252085+OR+252093+OR+252107+OR+252115+OR+252123+OR+252131+OR+252140+OR+253839+OR+253847+OR+254258+OR+254410+OR+254428+OR+254436%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/shiga-pref.css" />
+  {% elif "q=organization%3A%28260002+OR+262013+OR+262021+OR+262030+OR+262048+OR+262056+OR+262064+OR+262072+OR+262081+OR+262099+OR+262102+OR+262111+OR+262129+OR+262137+OR+262145+OR+263036+OR+263222+OR+263435+OR+263443+OR+263648+OR+263656+OR+263664+OR+263672+OR+264075+OR+264636+OR+264652%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/kyoto-pref.css" />
+  {% elif "q=organization%3A%28470007+OR+472018+OR+472051+OR+472077+OR+472085+OR+472093+OR+472107+OR+472115+OR+472123+OR+472131+OR+472140+OR+472158+OR+473014+OR+473022+OR+473031+OR+473065+OR+473081+OR+473111+OR+473138+OR+473146+OR+473154+OR+473243+OR+473251+OR+473260+OR+473278+OR+473286+OR+473294+OR+473481+OR+473502+OR+473537+OR+473545+OR+473553+OR+473561+OR+473570+OR+473588+OR+473596+OR+473600+OR+473618+OR+473626+OR+473758+OR+473812+OR+473821%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/okinawa-pref.css" />
+  {% elif "q=organization%3A%28270008+OR+271004+OR+271403+OR+272027+OR+272035+OR+272043+OR+272051+OR+272060+OR+272078+OR+272086+OR+272094+OR+272108+OR+272116+OR+272124+OR+272132+OR+272141+OR+272159+OR+272167+OR+272175+OR+272183+OR+272191+OR+272205+OR+272213+OR+272221+OR+272230+OR+272248+OR+272256+OR+272264+OR+272272+OR+272281+OR+272299+OR+272302+OR+272311+OR+272329+OR+273015+OR+273210+OR+273228+OR+273414+OR+273619+OR+273627+OR+273660+OR+273813+OR+273821+OR+273830%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/osaka-pref.css" />
+  {% elif "q=organization%3A%28460001+OR+462012+OR+462039+OR+462047+OR+462063+OR+462080+OR+462101+OR+462136+OR+462144+OR+462152+OR+462161+OR+462179+OR+462187+OR+462195+OR+462209+OR+462217+OR+462225+OR+462233+OR+462241+OR+462250+OR+463035+OR+463043+OR+463922+OR+464040+OR+464520+OR+464686+OR+464821+OR+464902+OR+464911+OR+464929+OR+465011+OR+465020+OR+465054+OR+465232+OR+465241+OR+465259+OR+465275+OR+465291+OR+465305+OR+465313+OR+465321+OR+465330+OR+465348+OR+465356%29" in c.search_url_params  %}
+      <link rel="stylesheet" type="text/css" href="/kagoshima-pref.css" />
+  {% elif c.pkg_dict %}
+      <link rel="stylesheet" type="text/css" href="/{{ c.pkg_dict['organization']['name'] }}.css" />
+  {% elif c.group.name and c.group.is_organization %}
+      <link rel="stylesheet" type="text/css" href="/{{ c.group.name }}.css" />
+  {% else %}
+      <link rel="stylesheet" type="text/css" href="/bodik_odcs.css" />
+  {% endif %}
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=1.7.1'></script>
+  <script type="text/javascript" src="https://odcs.bodik.jp/wp-content/themes/bodik_odcs/jquery/scrolltopcontrol.js"></script>
+
+  {% resource 'bodik_theme/font-awesome/css/font-awesome.css' %}
+{% endblock %}
+
+{% block head_extras %}
+  {{ super() }}
+
+{% endblock %}

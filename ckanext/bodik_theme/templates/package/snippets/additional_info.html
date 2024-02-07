@@ -30,6 +30,13 @@
           </tr>
     {% endif %}
 
+    {% if pkg_dict.metadata_modified %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Last Updated") }}</th>
+            <td class="dataset-details">{{ h.bodik_theme_render_datetime(pkg_dict.metadata_modified, date_format='%Y-%m-%d %H:%M', with_hours=True) }}</td>
+          </tr>
+    {% endif %}
+
     {% block extras scoped %}
         {% for extra in h.sorted_extras(pkg_dict.extras) %}
           {% set key, value = extra %}

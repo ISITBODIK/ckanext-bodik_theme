@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+  {% block metadata_fields %}
+    {% call form.select('encoding', id='field-encoding', label='文字コード', options=[{'value': '', 'text': '文字コードを選択してください'},{'value': 'utf-8', 'text': 'UTF-8'},{'value': 'utf-8_sig', 'text': 'UTF-8(BOM)'},{'value': 'shift_jis', 'text': 'SJIS'},{'value': 'cp932', 'text': 'CP932'},{'value': 'euc_jp', 'text': 'EUC'}], selected="",error=errors.encoding, classes=['control-medium']) %}
+      <span class="info-block info-block-small">
+        <i class="fa fa-info-circle"></i>
+          {{ '通常は選択する必要がありません。SHPなどで必要な場合のみ選択してください。' }}
+      </span>
+    {% endcall %}
+  {% endblock %}
