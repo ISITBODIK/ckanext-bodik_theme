@@ -13,7 +13,7 @@ CKAN 用のデザインテーマ拡張 (Theme Extension) です。
 
 ## Requirements
 
-- CKAN 2.9 以降
+- CKAN 2.10 以降
 - Python 3.x
 
 ---
