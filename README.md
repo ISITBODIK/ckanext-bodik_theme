@@ -26,6 +26,8 @@ cd ckanext-bodik_theme
 pip install -e .
 ```
 
+---
+
 ## Configuration
 
 ckan.ini に下記の設定を追加してください。
@@ -41,6 +43,9 @@ bodik.wordpress_url = https://your-wordpress-domain.example
 # Opendata Map site URL
 bodik.map_url = https://your-map-domain.example
 ```
+
+---
+
 # License
 MIT License
 
