@@ -51,4 +51,4 @@ MIT License
 
 Copyright (c) 2025  
 ISIT (Institute of Systems, Information Technologies and Nanotechnologies)  
-Big Data & Open Data Initiative Kyushu (BODIK)
+BODIK (Big Data & Open Data Initiative Kyushu)
