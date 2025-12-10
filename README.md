@@ -50,5 +50,7 @@ bodik.map_url = https://your-map-domain.example
 MIT License
 
 Copyright (c) 2025
+
 ISIT (Institute of Systems, Information Technologies and Nanotechnologies)
+
 Big Data & Open Data Initiative Kyushu (BODIK)
