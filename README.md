@@ -46,7 +46,7 @@ bodik.map_url = https://your-map-domain.example
 
 ---
 
-# License
+## License
 MIT License
 
 Copyright (c) 2025
