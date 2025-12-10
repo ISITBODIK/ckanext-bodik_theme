@@ -30,28 +30,28 @@
       <link rel="stylesheet" type="text/css" href="/kagoshima-pref.css" />
   {% elif c.pkg_dict %}
       <link rel="stylesheet" type="text/css" href="/{{ c.pkg_dict['organization']['name'] }}.css" />
-  {% elif c.group.name and c.group.is_organization %}
-      <link rel="stylesheet" type="text/css" href="/{{ c.group.name }}.css" />
+  {% elif c.group_dict and c.group_dict.is_organization %}
+      <link rel="stylesheet" type="text/css" href="/{{ c.group_dict.name }}.css" />
   {% else %}
       <link rel="stylesheet" type="text/css" href="/bodik_odcs.css" />
   {% endif %}
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js?ver=1.7.1'></script>
-  <script type="text/javascript" src="https://odcs.bodik.jp/wp-content/themes/bodik_odcs/jquery/scrolltopcontrol.js"></script>
+  <script type="text/javascript" src="{{ h.bodik_theme_wordpress_url() }}/wp-content/themes/bodik_odcs/jquery/scrolltopcontrol.js"></script>
 
-  {% resource 'bodik_theme/font-awesome/css/font-awesome.css' %}
+  <link rel="stylesheet" type="text/css" href="/vendor/font-awesome-3/css/font-awesome.min.css" />
 {% endblock %}
 
 {% block head_extras %}
   {{ super() }}
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BDK548J9MN"></script>
+{# <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E55884W67N"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-BDK548J9MN');
-</script>
+  gtag('config', 'G-E55884W67N');
+</script> #}
 
 {% endblock %}

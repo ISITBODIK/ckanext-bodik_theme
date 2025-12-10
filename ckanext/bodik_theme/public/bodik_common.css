@@ -5,7 +5,7 @@
   [role=main],
   .main {
     padding-top: 10px;
-    background: #ffffff url("../../../base/images/bg.png");
+    /* background: #ffffff url("../../../base/images/bg.png"); */
   }
 }
 
@@ -51,7 +51,7 @@
  *全体
 * ************************************************ */
 body {
-  background: url("https://odcs.bodik.jp/wp-content/themes/bodik_odcs/images/bg.png");
+  background: url("../images/bg.png");
   //background: #fff;
   //background: url("../../../base/images/bg.png");
   font-family:arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
@@ -71,7 +71,9 @@ body {
   width: 960px;
 }
 
-
+.search input {
+  height: initial !important;
+}
 
 /* ************************************************ 
  *ヘッダー

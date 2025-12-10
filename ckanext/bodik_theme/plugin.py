@@ -1,8 +1,8 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
+from ckan.common import config
 import sys
-import urllib2
 import json
 import datetime
 
@@ -50,6 +50,15 @@ def resource_count( search_org ):
     else:
         return 0
 
+def site_url():
+    return toolkit.config.get('ckan.site_url', '#')
+
+def wordpress_url():
+    return toolkit.config.get('bodik.wordpress_url', '#')
+
+def map_url():
+    return toolkit.config.get('bodik.map_url', '#')
+
 
 class BodikThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
@@ -68,4 +77,7 @@ class BodikThemePlugin(plugins.SingletonPlugin):
             'bodik_theme_get_tag': get_tag,
             'bodik_theme_render_datetime': render_datetime,
             'bodik_theme_resource_count': resource_count,
+            'bodik_theme_site_url': site_url,
+            'bodik_theme_wordpress_url': wordpress_url,
+            'bodik_theme_map_url': map_url,
         }

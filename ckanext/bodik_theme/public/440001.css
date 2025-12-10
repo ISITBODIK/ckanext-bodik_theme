@@ -8,6 +8,14 @@ a {
   text-decoration: none;
 }
 
+/* ************************************************
+*       button
+* *************************************************/
+.btn-primary {
+    color: #fff;
+    background-color: #5F9548 !important;
+    border-color: #5F9548 !important;
+}
 
 /* ************************************************ 
 *	topinfo

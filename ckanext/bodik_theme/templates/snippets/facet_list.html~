@@ -1,7 +1,0 @@
-{% ckan_extends %}
-
-{% block facet_list_items %}
-  
-     {{ super() }}
-
-{% endblock %}

@@ -136,3 +136,29 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# ----------------------------------------------------------------------
+# Editor / backup / temp files (BODIK theme specific)
+# ----------------------------------------------------------------------
+
+# Editor backup (~ で終わるファイル)
+*~
+
+# 日付付きバックアップファイル (example.css.20250218 / header.html.20241210)
+*.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]
+
+# 手動バックアップ・一時ファイル
+*.bak
+*.bsk
+*.backup
+*.temp
+*.template
+*.org
+
+# Vim / 他エディタの一時ファイル (念のため)
+*.swp
+*.swo
+
+# OS / エクスプローラー系
+.DS_Store
+Thumbs.db

@@ -3,8 +3,10 @@
 {% block content_primary_nav %}
 
   {% if c.userobj %}
-    {{ h.build_nav_icon('group_read', _('Datasets'), id=c.group_dict.name) }}
-    {{ h.build_nav_icon('group_activity', _('Activity Stream'), id=c.group_dict.name, offset=0) }}
-    {{ h.build_nav_icon('group_about', _('About'), id=c.group_dict.name) }}
+    {% if c.group_dict %}
+      {{ h.build_nav_icon('group.read', _('Datasets'), id=c.group_dict.name, icon='sitemap') }}
+      {{ h.build_nav_icon('activity.group_activity', _('Activity Stream'), id=c.group_dict.name, offset=0, icon='clock') }}
+      {{ h.build_nav_icon('group.about', _('About'), id=c.group_dict.name, icon='info-circle') }}
+    {% endif %}
   {% endif %}
 {% endblock %}
