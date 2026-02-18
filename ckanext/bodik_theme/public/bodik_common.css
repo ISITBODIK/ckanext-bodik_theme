@@ -52,8 +52,8 @@
 * ************************************************ */
 body {
   background: url("../images/bg.png");
-  //background: #fff;
-  //background: url("../../../base/images/bg.png");
+  /* background: #fff; */
+  /* background: url("../../../base/images/bg.png"); */
   font-family:arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
   font-size: 14px;
   color: #444;
@@ -64,7 +64,7 @@ body {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-//  width: 960px;
+  /* width: 960px; */
 }
 
 .span12 {
