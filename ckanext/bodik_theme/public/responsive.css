@@ -739,10 +739,8 @@ input.input-search {
   padding: 6px 16px;
   border-radius: 4px;
   background-color: #f3f3f3;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e1e1e1));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: -o-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: -moz-linear-gradient(top, #ffffff, #e1e1e1);
+  background-image: -ms-linear-gradient(top, #ffffff, #e1e1e1);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e1e1e1', GradientType=0);
   border: 1px solid #dadada;
   border-left: 1px solid #d2d2d2;
