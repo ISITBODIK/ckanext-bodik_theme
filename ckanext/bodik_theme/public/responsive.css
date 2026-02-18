@@ -1389,3 +1389,8 @@ a.error:hover {
 .nav-facet .nav-item {
   position: relative;
 }
+
+.search-form .control-order-by select,
+.search-form .control-order-by #field-order-by {
+  width: 150px;
+}
