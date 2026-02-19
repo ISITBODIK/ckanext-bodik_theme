@@ -1376,17 +1376,6 @@ a.error:hover {
   }
 }
 
-.nav-facet .facet-close {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.nav-facet .nav-item {
-  position: relative;
-}
-
 .search-form .control-order-by select,
 .search-form .control-order-by #field-order-by {
   width: 150px;
