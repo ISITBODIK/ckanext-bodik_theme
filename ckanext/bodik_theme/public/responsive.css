@@ -1380,3 +1380,17 @@ a.error:hover {
 .search-form .control-order-by #field-order-by {
   width: 150px;
 }
+
+.module-narrow .nav-item.active .item-label,
+.module-narrow .nav-item.active .hidden.separator,
+.module-narrow .nav-item.active .item-count,
+.module-narrow .nav-item.active .facet-close,
+.module-narrow .nav-item.active .facet-close i {
+  color: #fff !important;
+}
+
+
+.filter-list .pill .remove,
+.filter-list .pill .remove i {
+  color: #fff !important;
+}
