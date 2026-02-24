@@ -33,7 +33,9 @@
       </tr>
       {% endif %}
       {% for key, value in h.format_resource_items(res.items()) %}
+        {% if key not in ('tracking summary', 'tracking_summary') %}
         <tr class="toggle-more"><th scope="row">{{ key }}</th><td>{{ value }}</td></tr>
+        {% endif %}
       {% endfor %}
     </tbody>
   </table>
