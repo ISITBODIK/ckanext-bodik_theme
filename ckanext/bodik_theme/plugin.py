@@ -5,6 +5,7 @@ from ckan.common import config
 import sys
 import json
 import datetime
+from ckan.lib.plugins import DefaultTranslation
 
 def dataset_count( search_org ):
     if search_org != "":
@@ -60,9 +61,10 @@ def map_url():
     return toolkit.config.get('bodik.map_url', '#')
 
 
-class BodikThemePlugin(plugins.SingletonPlugin):
+class BodikThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.ITranslation)
     # IConfigurer
 
     def update_config(self, config_):
