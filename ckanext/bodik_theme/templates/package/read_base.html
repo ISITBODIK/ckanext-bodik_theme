@@ -8,3 +8,17 @@
     {# {{ h.build_nav_icon('related_list', _('Related'), id=pkg.name) }} #}
   {% endif %}
 {% endblock %}
+
+{% block package_license %}
+<section class="module module-narrow module-shallow license">
+  <h2 class="module-heading"><i class="fa fa-lock"></i> {{ _('License') }}</h2>
+  <p class="module-content">
+    <a href="{{ pkg.license_url }}" rel="dc:rights">{{ h.bodik_theme_translate_license(pkg.license_title) }}</a>
+    {% if pkg.isopen %}
+    <a href="http://opendefinition.org/okd/" title="{{ _('This dataset satisfies the Open Definition.') }}">
+      <img class="open-data" src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="[Open Data]" />
+    </a>
+    {% endif %}
+  </p>
+</section>
+{% endblock %}
