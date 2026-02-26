@@ -18,7 +18,8 @@
       </tr>
       <tr>
         <th scope="row">{{ _('License') }}</th>
-        <td>{% snippet "snippets/license.html", pkg_dict=pkg, text_only=True %}</td>
+        <td><a href="{{ package.license_url }}" rel="dc:rights">{{
+            h.bodik_theme_translate_license(package.get('license_title')) }}</a></td>
       </tr>
       {% if res.last_modified %}
       <tr>
