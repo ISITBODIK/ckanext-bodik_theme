@@ -74,6 +74,11 @@ class BodikThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IConfigurer
 
     def update_config(self, config_):
+        import os
+        licenses_path = os.path.join(
+            os.path.dirname(__file__), 'data', 'licenses.json'
+        )
+        config_['licenses_group_url'] = 'file://' + licenses_path
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'bodik_theme')
