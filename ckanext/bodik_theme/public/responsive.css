@@ -739,13 +739,6 @@ input.input-search {
   padding: 6px 16px;
   border-radius: 4px;
   background-color: #f3f3f3;
-  background-image: -moz-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: -ms-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e1e1e1));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: -o-linear-gradient(top, #ffffff, #e1e1e1);
-  background-image: linear-gradient(top, #ffffff, #e1e1e1);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e1e1e1', GradientType=0);
   border: 1px solid #dadada;
   border-left: 1px solid #d2d2d2;
   border-right: 1px solid #d2d2d2;
@@ -882,6 +875,14 @@ input.input-search {
 /* ************************************************ 
 *	Grid
 * ************************************************ */
+
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 960px !important;
+  max-width: 960px !important;
+}
 
 .row {
   margin-bottom: 1.5em;
@@ -1215,9 +1216,6 @@ input.big {
   font-weight: normal;
   color: #da3e5a;
 }
-.highlight {
-  background-color: #e5ecf5 !important;
-}
 
 /* Width */
 .width-33 {
@@ -1373,4 +1371,23 @@ a.error:hover {
   .forms fieldset legend {
     padding: 0;
   }
+}
+
+.search-form .control-order-by select,
+.search-form .control-order-by #field-order-by {
+  width: 150px;
+}
+
+.module-narrow .nav-item.active .item-label,
+.module-narrow .nav-item.active .hidden.separator,
+.module-narrow .nav-item.active .item-count,
+.module-narrow .nav-item.active .facet-close,
+.module-narrow .nav-item.active .facet-close i {
+  color: #fff !important;
+}
+
+
+.filter-list .pill .remove,
+.filter-list .pill .remove i {
+  color: #fff !important;
 }

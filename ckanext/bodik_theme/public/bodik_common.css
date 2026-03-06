@@ -52,8 +52,8 @@
 * ************************************************ */
 body {
   background: url("../images/bg.png");
-  //background: #fff;
-  //background: url("../../../base/images/bg.png");
+  /* background: #fff; */
+  /* background: url("../../../base/images/bg.png"); */
   font-family:arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
   font-size: 14px;
   color: #444;
@@ -64,7 +64,7 @@ body {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-//  width: 960px;
+  /* width: 960px; */
 }
 
 .span12 {
@@ -815,4 +815,106 @@ a:hover img{
 opacity:0.7;
 filter:alpha(opacity=70);
 -ms-filter: "alpha( opacity=70 )";
+}
+
+.row.footer-widgets.g-0>.footer-half,
+.row.footer-widgets.g-0>.footer-third {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row.footer-widgets {
+  align-items: flex-start;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.row.footer-widgets .sidebar-title2 {
+  display: block;
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  white-space: nowrap !important;
+}
+
+.row.footer-widgets .footer-half .textwidget {
+  display: flex !important;
+  align-items: flex-start;
+  flex-wrap: nowrap !important;
+  gap: 12px;
+}
+
+.row.footer-widgets .footer-half .textwidget .alignleft {
+  float: none !important;
+}
+
+.row.footer-widgets .footer-half .textwidget>a {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.row.footer-widgets .footer-half .textwidget>a img {
+  display: block;
+  height: 32px;
+  width: auto !important;
+  max-width: none !important;
+  margin: 2px 0 0 0;
+}
+
+.row.footer-widgets .footer-half .textwidget>span.alignleft.white {
+  flex: 1 1 auto !important;
+  min-width: 0;
+  line-height: 1.5;
+  margin: 0;
+  word-break: normal !important;
+  overflow-wrap: anywhere;
+}
+
+.row.footer-widgets .footer-third .textwidget {
+  margin: 0;
+}
+
+.row.footer-widgets .footer-third .textwidget a {
+  display: block;
+  margin-top: 6px;
+}
+
+.row.footer-widgets .footer-third .textwidget img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 767.98px) {
+
+  .row.footer-widgets.g-0>.footer-half,
+  .row.footer-widgets.g-0>.footer-third {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .row.footer-widgets {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .row.footer-widgets .footer-half .textwidget {
+    flex-wrap: wrap !important;
+    gap: 10px;
+  }
+
+  .row.footer-widgets .footer-half .textwidget>a {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .row.footer-widgets .footer-half .textwidget>span.alignleft.white {
+    min-width: 0;
+  }
+
+  .row.footer-widgets .footer-third {
+    margin-top: 12px;
+  }
 }
