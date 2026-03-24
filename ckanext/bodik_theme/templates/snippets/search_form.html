@@ -1,7 +1,7 @@
 {% ckan_extends %}
 
   {% block search_input %}
-
+    <input type="hidden" name="q" value="{{ query }}">
   {% endblock %}
   
   {% block search_sortby %}
